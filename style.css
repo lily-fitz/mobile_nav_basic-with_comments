@@ -1,0 +1,129 @@
+/* box-sizing to border-box */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove margins on body */
+body {
+  margin: 0;
+}
+
+/* remover margins & padding on lists */
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+/* format header/container */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 4rem);
+  margin-inline: auto;
+  padding-block: 20px;
+}
+
+/* format nav list */
+.nav-list {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+/* ----------------- */
+/* mobile navigation */
+/* ----------------- */
+
+/* hide button by default, position on top of all other elements */
+
+.menu-button {
+  z-index: 9999;
+  position: relative;
+  cursor: pointer;
+  display: none;
+}
+
+/* breakpoint for styling on mobile */
+@media (max-width: 46rem) {
+  /* show button, alter cursor, add padding */
+  .menu-button {
+    display: block;
+    padding: 14px 2px;
+  }
+
+  /* format nav list */
+  .nav-list {
+    display: none;
+
+    background-color: rgb(162, 212, 255);
+    position: fixed;
+    inset: 0;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  /* change nav list display value based on data attribute */
+  .nav-list[data-visible='true'] {
+    display: flex;
+  }
+
+  /* set button span to pos relative */
+  .menu-button span {
+    position: relative;
+  }
+
+  /* create before & after pseudo elements */
+  .menu-button span::before,
+  .menu-button span::after {
+    position: absolute;
+    content: '';
+  }
+
+  /* style menu lines */
+  .menu-button span,
+  .menu-button span::before,
+  .menu-button span::after {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background-color: black;
+  }
+
+  /* position top menu line */
+  .menu-button span::before {
+    margin-top: -8px;
+  }
+
+  /* position bottom menu line */
+  .menu-button span::after {
+    margin-top: 8px;
+  }
+
+  /* active */
+  /* hide button span */
+  .menu-active span {
+    background-color: transparent;
+  }
+
+  /* default position for before & after pseudo elements (overlapping in the center of the button) */
+  .menu-active span::before,
+  .menu-active span::after {
+    margin-top: 0;
+  }
+
+  /* rotate top menu line */
+  .menu-active span::before {
+    transform: rotate(45deg);
+  }
+
+  /* rotate bottom menu line */
+  .menu-active span::after {
+    transform: rotate(-45deg);
+  }
+}
